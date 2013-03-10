@@ -69,8 +69,5 @@ namespace trainteaser.tests
             //assert
             Assert.That(foundRoute.Distance, Is.EqualTo(expectation));
         }
-
-
-        
     }
 }
