@@ -39,6 +39,23 @@ namespace trainteaser.tests
             //assert
             Assert.That(foundRoute.Distance, Is.EqualTo(expectation));
         }
+
+        [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7", 13)]
+        [TestCase("Graph: AB5, BC8, CD8, DC8, DE6, AD9, CE2, EB3, AE7", 17)]
+        [Test]
+        public void WhatIsTheDistance_ForRoute_AtoDtoC(string graphInput, int expectation)
+        {
+            //arrange
+            var graph = new Graph(graphInput);
+
+            //act
+            var foundRoute = new RouteFinder(graph).FindRoute(new RouteRequest('A', 'D', 'C'));
+
+            //assert
+            Assert.That(foundRoute.Distance, Is.EqualTo(expectation));
+        }
+
+
         
     }
 }
