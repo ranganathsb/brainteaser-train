@@ -6,6 +6,7 @@ namespace trainteaser.tests
     public class TripTests
     {
         [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7", 2)]
+        [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7, CB1", 3)]
         [Test]
         public void WhatAreTheNumberOfTrips_StartingAtCAndEndingAtC_WithAMaximumOfThreeHops(string graphInput, int expectation)
         {
