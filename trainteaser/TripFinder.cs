@@ -21,6 +21,31 @@ namespace trainteaser
             return response;
         }
 
+        public TripResponse FindTripWithExactlySetNumberOfStops(char startTown, char destination, int numberOfStops)
+        {
+            var response = new TripResponse();
+
+            FindTripsWithExactNumberOfStops(startTown, destination, 0, numberOfStops, response);
+            
+            return response;
+        }
+
+        private void FindTripsWithExactNumberOfStops(char startTown, char destination, int stops, int numberOfStops, TripResponse response)
+        {
+            if (stops > numberOfStops)
+                return;
+
+            var countTheseTrips = stops == numberOfStops;
+
+            var routes = GetRoutesFromStartingTown(startTown);
+
+            response.NumberOfTrips += countTheseTrips ? GetRoutesThatAreFinished(destination, routes) : 0;
+
+            stops++;
+
+            LookAtRoutesThatCouldWork(destination, stops, numberOfStops, response, routes);
+        }
+
         private void FindTrips(char startTown, char destination, int stops, TripResponse response)
         {
             if (stops == 3)
@@ -50,6 +75,14 @@ namespace trainteaser
             foreach (var routeToCheck in routes.Where(x => x.EndingTown != destination))
             {
                 FindTrips(routeToCheck.EndingTown, destination, stops, response);
+            }
+        }
+
+        private void LookAtRoutesThatCouldWork(char destination, int stops, int numberOfStops, TripResponse response, IQueryable<Route> routes)
+        {
+            foreach (var routeToCheck in routes)
+            {
+                FindTripsWithExactNumberOfStops(routeToCheck.EndingTown, destination, stops, numberOfStops, response);
             }
         }
     }
