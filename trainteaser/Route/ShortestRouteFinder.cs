@@ -17,7 +17,7 @@ namespace trainteaser.Route
         {
             var routes = FindAllRoutes(startingTown, endingTown);
 
-            return new RouteResponse {Distance = routes.Min(x => x.PathDistance)};
+            return !routes.Any() ? new RouteResponse {NoRouteFound = true} : new RouteResponse {Distance = routes.Min(x => x.PathDistance)};
         }
 
         private IList<Route> FindAllRoutes(char startingTown, char endingTown)
