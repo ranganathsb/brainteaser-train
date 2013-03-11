@@ -5,7 +5,7 @@ namespace trainteaser
 {
     public class TripFinder
     {
-        public Graph Graph { get; set; }
+        private Graph Graph { get; set; }
 
         public TripFinder(Graph graph)
         {
@@ -26,12 +26,27 @@ namespace trainteaser
             if (stops == 3)
                 return;
 
-            var routes = Graph.QueryRoutes().Where(x => x.StartingTown == startTown);
+            var routes = GetRoutesFromStartingTown(startTown);
 
-            response.NumberOfTrips += routes.Count(x => x.EndingTown == destination);
+            response.NumberOfTrips += GetRoutesThatAreFinished(destination, routes);
 
             stops++;
 
+            LookAtRoutesThatCouldWork(destination, stops, response, routes);
+        }
+
+        private static int GetRoutesThatAreFinished(char destination, IQueryable<Route> routes)
+        {
+            return routes.Count(x => x.EndingTown == destination);
+        }
+
+        private IQueryable<Route> GetRoutesFromStartingTown(char startTown)
+        {
+            return Graph.QueryRoutes().Where(x => x.StartingTown == startTown);
+        }
+
+        private void LookAtRoutesThatCouldWork(char destination, int stops, TripResponse response, IQueryable<Route> routes)
+        {
             foreach (var routeToCheck in routes.Where(x => x.EndingTown != destination))
             {
                 FindTrips(routeToCheck.EndingTown, destination, stops, response);
