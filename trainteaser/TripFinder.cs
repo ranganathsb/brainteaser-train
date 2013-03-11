@@ -28,11 +28,13 @@ namespace trainteaser
 
         protected void LookAtRoutesThatCouldWork(char destination, int stops, TripResponse response, IQueryable<Route> routes)
         {
-            foreach (var routeToCheck in routes.Where(x => x.EndingTown != destination))
+            foreach (var routeToCheck in GetRoutesToLookAt(destination, routes))
             {
                 FindTrips(new TripQuery { StartingTown = routeToCheck.EndingTown, Desination = destination, Stops = stops, Response = response });
             }
-        }        
+        }
+
+        protected abstract IQueryable<Route> GetRoutesToLookAt(char destination, IQueryable<Route> routes);
     }
 
     public class TripQuery

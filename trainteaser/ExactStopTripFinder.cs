@@ -1,4 +1,6 @@
-﻿namespace trainteaser
+﻿using System.Linq;
+
+namespace trainteaser
 {
     public class ExactStopTripFinder: TripFinder
     {
@@ -32,6 +34,11 @@
             query.Stops++;
 
             LookAtRoutesThatCouldWork(query.Desination, query.Stops, query.Response, routes);
+        }
+
+        protected override IQueryable<Route> GetRoutesToLookAt(char destination, IQueryable<Route> routes)
+        {
+            return routes;
         }
     }
 }
