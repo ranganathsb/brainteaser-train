@@ -7,5 +7,7 @@
         public char EndingTown { get; set; }
 
         public int Distance { get; set; }
+
+        public bool NoRouteFound { get; set; }
     }
 }

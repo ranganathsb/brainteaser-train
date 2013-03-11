@@ -22,7 +22,7 @@ namespace trainteaser.tests
             var foundRoute = new RouteFinder(graph).FindRoute(new RouteRequest('A', 'B', 'C'));
 
             //assert
-            Assert.That(foundRoute.Distance, Is.EqualTo(expectation));
+            Assert.That(foundRoute.GetResponse(), Is.EqualTo(expectation.ToString()));
         }
 
         [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7", 5)]
@@ -37,7 +37,7 @@ namespace trainteaser.tests
             var foundRoute = new RouteFinder(graph).FindRoute(new RouteRequest('A', 'D'));
 
             //assert
-            Assert.That(foundRoute.Distance, Is.EqualTo(expectation));
+            Assert.That(foundRoute.GetResponse(), Is.EqualTo(expectation.ToString()));
         }
 
         [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7", 13)]
@@ -52,7 +52,7 @@ namespace trainteaser.tests
             var foundRoute = new RouteFinder(graph).FindRoute(new RouteRequest('A', 'D', 'C'));
 
             //assert
-            Assert.That(foundRoute.Distance, Is.EqualTo(expectation));
+            Assert.That(foundRoute.GetResponse(), Is.EqualTo(expectation.ToString()));
         }
 
         [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7", 22)]
@@ -67,13 +67,13 @@ namespace trainteaser.tests
             var foundRoute = new RouteFinder(graph).FindRoute(new RouteRequest('A', 'E', 'B', 'C', 'D'));
 
             //assert
-            Assert.That(foundRoute.Distance, Is.EqualTo(expectation));
+            Assert.That(foundRoute.GetResponse(), Is.EqualTo(expectation.ToString()));
         }
 
-        [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7", 22)]
-        [TestCase("Graph: AB5, BC8, CD8, DC8, DE6, AD9, CE2, EB3, AE7", 26)]
+        [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7", "NO SUCH ROUTE")]
+        [TestCase("Graph: AB5, BC8, CD8, DC8, DE6, AD9, CE2, EB3, AE7", "NO SUCH ROUTE")]
         [Test]
-        public void WhatIsTheDistance_ForRoute_AtoEtoD(string graphInput, int expectation)
+        public void WhatIsTheDistance_ForRoute_AtoEtoD(string graphInput, string expectation)
         {
             //arrange
             var graph = new Graph(graphInput);
@@ -82,7 +82,7 @@ namespace trainteaser.tests
             var foundRoute = new RouteFinder(graph).FindRoute(new RouteRequest('A', 'E', 'D'));
 
             //assert
-            Assert.That(foundRoute.Distance, Is.EqualTo(expectation));
+            Assert.That(foundRoute.GetResponse(), Is.EqualTo(expectation));
         }
     }
 }

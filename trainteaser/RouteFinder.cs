@@ -17,8 +17,12 @@ namespace trainteaser
 
             foreach (var route in routeRequest.GetRoutes())
             {
-                var foundRoute = FindRouteForStartingTownToEndingTown(route.StartingTown, route.EndingTown);
-                distance += foundRoute.Distance;
+                var proposedRoute = FindRouteForStartingTownToEndingTown(route.StartingTown, route.EndingTown);
+
+                if (proposedRoute.NoRouteFound)
+                    return new RouteResponse {Distance = 0, NoRouteFound = true};
+
+                distance += proposedRoute.Distance;
             }
 
             return new RouteResponse {Distance = distance};
@@ -26,7 +30,9 @@ namespace trainteaser
 
         private Route FindRouteForStartingTownToEndingTown(char startingTown, char endingTown)
         {
-            return Graph.QueryRoutes().FirstOrDefault(x => x.StartingTown == startingTown && x.EndingTown == endingTown);
+            var result =
+                Graph.QueryRoutes().FirstOrDefault(x => x.StartingTown == startingTown && x.EndingTown == endingTown);
+            return result ?? new Route {Distance = 0, NoRouteFound = true};
         }
     }
 }
