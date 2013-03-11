@@ -21,6 +21,21 @@ namespace trainteaser.tests
             //asset
             Assert.That(routeResponse.GetResponse(), Is.EqualTo(expectation.ToString()));
         }
+
+        [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7", 9)]
+        [TestCase("Graph: AB1, BC4, CD1, DA2, DE6, AD5, CE2, EB3, AE7", 8)]
+        [Test]
+        public void WhatIsThe_ShortestRoute_FromBtoB(string graphInput, int expectation)
+        {
+            //arrange
+            var graph = new Graph(graphInput);
+
+            //act
+            var routeResponse = new ShortestRouteFinder(graph).FindRoute('B', 'B');
+
+            //asset
+            Assert.That(routeResponse.GetResponse(), Is.EqualTo(expectation.ToString()));
+        }
          
     }
 }
