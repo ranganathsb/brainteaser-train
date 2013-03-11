@@ -14,7 +14,7 @@ namespace trainteaser.tests
             var graph = new Graph(graphInput);
 
             //act
-            var tripResponse = new TripFinder(graph).FindTrip('C', 'C');
+            var tripResponse = new MaxStopTripFinder(graph).FindTrip('C', 'C');
 
             //assert
             Assert.That(tripResponse.NumberOfTrips, Is.EqualTo(expectation));
@@ -29,7 +29,7 @@ namespace trainteaser.tests
             var graph = new Graph(graphInput);
 
             //act
-            var tripResponse = new TripFinder(graph).FindTripWithExactlySetNumberOfStops('A', 'C', 4);
+            var tripResponse = new ExactStopTripFinder(graph).FindTrip('A', 'C');
 
             //assert
             Assert.That(tripResponse.NumberOfTrips, Is.EqualTo(expectation));
