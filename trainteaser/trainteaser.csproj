@@ -48,6 +48,7 @@
     <Compile Include="Route\RouteFinder.cs" />
     <Compile Include="Route\RouteRequest.cs" />
     <Compile Include="Route\RouteResponse.cs" />
+    <Compile Include="Route\ShortestRouteFinder.cs" />
     <Compile Include="Trip\ExactStopTripFinder.cs" />
     <Compile Include="Trip\MaxStopTripFinder.cs" />
     <Compile Include="Trip\TripFinder.cs" />
