@@ -49,6 +49,7 @@
     <Compile Include="RouteRequest.cs" />
     <Compile Include="RouteResponse.cs" />
     <Compile Include="TripFinder.cs" />
+    <Compile Include="TripResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
