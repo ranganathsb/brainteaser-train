@@ -14,12 +14,12 @@ namespace trainteaser
 
             var routeInputs = graphInput.Split(',');
 
-            Routes = new List<Route>();
+            Routes = new List<Route.Route>();
 
             foreach (var routeInput in routeInputs)
             {
                 var route = routeInput.Trim();
-                Routes.Add(new Route
+                Routes.Add(new Route.Route
                     {
                         StartingTown = route[0],
                         EndingTown = route[1],
@@ -28,9 +28,9 @@ namespace trainteaser
             }
         }
 
-        private IList<Route> Routes { get; set; }
+        private IList<Route.Route> Routes { get; set; }
 
-        public IQueryable<Route> QueryRoutes()
+        public IQueryable<Route.Route> QueryRoutes()
         {
             return Routes.AsQueryable();
         }

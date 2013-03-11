@@ -1,4 +1,4 @@
-﻿namespace trainteaser
+namespace trainteaser.Route
 {
     public class Route
     {

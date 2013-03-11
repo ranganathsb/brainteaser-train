@@ -1,4 +1,4 @@
-﻿namespace trainteaser
+namespace trainteaser.Trip
 {
     public class TripResponse
     {

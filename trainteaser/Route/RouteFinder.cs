@@ -1,6 +1,6 @@
-﻿using System.Linq;
+using System.Linq;
 
-namespace trainteaser
+namespace trainteaser.Route
 {
     public class RouteFinder
     {
