@@ -45,7 +45,7 @@ namespace trainteaser.Route
 
         public IList<Route> FindAllRoutes(char startingTown, char endingTown, int maxDistance)
         {
-            var routes = Graph.QueryRoutes().Where(x => x.StartingTown == startingTown);
+            var routes = Graph.CopyRoutes().Where(x => x.StartingTown == startingTown);
 
             var queue = new Queue<Route>();
             routes.ToList().ForEach(queue.Enqueue);
