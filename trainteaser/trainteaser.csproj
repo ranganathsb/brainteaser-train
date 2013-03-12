@@ -42,8 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Graph.cs" />
+    <Compile Include="IResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Route\AllRoutesAlgorithm.cs" />
+    <Compile Include="Route\IRoutesFound.cs" />
+    <Compile Include="Route\NumberOfRoutesFinder.cs" />
+    <Compile Include="Route\NumberOfRoutesResponse.cs" />
     <Compile Include="Route\Route.cs" />
     <Compile Include="Route\RouteFinder.cs" />
     <Compile Include="Route\RouteRequest.cs" />

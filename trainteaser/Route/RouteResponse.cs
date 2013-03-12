@@ -1,6 +1,6 @@
 namespace trainteaser.Route
 {
-    public class RouteResponse
+    public class RouteResponse: IResponse
     {
         public int Distance { get; set; }
 

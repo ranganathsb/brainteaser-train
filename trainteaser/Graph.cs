@@ -34,5 +34,10 @@ namespace trainteaser
         {
             return Routes.AsQueryable();
         }
+
+        public IQueryable<Route.Route> CopyRoutes()
+        {
+            return Routes.Select(x => new Route.Route { Distance = x.Distance, EndingTown = x.EndingTown, StartingTown = x.StartingTown }).AsQueryable();
+        }
     }
 }
