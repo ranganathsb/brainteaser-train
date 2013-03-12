@@ -5,6 +5,8 @@ PROBLEM ONE: TRAINS
 
 WRITTEN IN: C#
 
+Repository available for this at: https://github.com/josephbulger/brainteaser-train
+
 Assumptions
 
 1. graph may not necessarily have to be acyclic, except for problem sets 8 and 9 where we're doing a shortest path. This is also evident by the fact that problem set 10 has cyclic routes in the sample.
