@@ -18,7 +18,7 @@ namespace trainteaser.tests
             var tripResponse = new MaxStopTripFinder(graph).FindTrip('C', 'C');
 
             //assert
-            Assert.That(tripResponse.NumberOfTrips, Is.EqualTo(expectation));
+            Assert.That(tripResponse.GetResponse(), Is.EqualTo(expectation.ToString()));
         }
 
         [TestCase("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7", 3)]
@@ -33,7 +33,7 @@ namespace trainteaser.tests
             var tripResponse = new ExactStopTripFinder(graph).FindTrip('A', 'C');
 
             //assert
-            Assert.That(tripResponse.NumberOfTrips, Is.EqualTo(expectation));
+            Assert.That(tripResponse.GetResponse(), Is.EqualTo(expectation.ToString()));
         }
          
     }
