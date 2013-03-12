@@ -10,38 +10,64 @@ namespace trainteaser
 {
     class Program
     {
-        private static Graph CreateGraph()
+        private static readonly string[] graphInputs = new[]
+            {
+                "Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7",
+                "Graph: AB1, BC4, CD1, DA2, DE6, AD5, CE2, EB3, AE7"
+            };
+
+        private static Graph CreateGraph(string graphInput)
         {
-            return new Graph("Graph: AB5, BC4, CD8, DC8, DE6, AD5, CE2, EB3, AE7");
+            return new Graph(graphInput);
         }
 
         static void Main(string[] args)
         {
-            var graph = CreateGraph();
+            foreach (var graphInput in graphInputs)
+            {
+                Console.WriteLine(graphInput);
 
-            var responses = new List<IResponse>();
+                var graph = CreateGraph(graphInput);
 
-            DoStraightRoutes(graph, responses);
+                var responses = new List<IResponse>();
 
-            DoMaxTripFinder(graph, responses);
+                DoStraightRoutes(graph, responses);
 
-            DoExactTripFinder(graph, responses);
+                DoMaxTripFinder(graph, responses);
 
-            responses.Add(new ShortestRouteFinder(CreateGraph()).FindRoute('A', 'C'));
-            responses.Add(new ShortestRouteFinder(CreateGraph()).FindRoute('B', 'B'));
+                DoExactTripFinder(graph, responses);
 
-            var numberOfRoutesFinder = new NumberOfRoutesFinder(graph);
+                DoShortestRouteFinder(responses, graphInput);
 
-            responses.Add(numberOfRoutesFinder.FindRoutes('C', 'C').WithDistanceLessThan(30));
+                DoNumberOfRoutesFinder(graph, responses);
 
+                ProcessResponses(responses);
+
+                Console.ReadLine();
+            }
+        }
+
+        private static void ProcessResponses(List<IResponse> responses)
+        {
             var i = 0;
             foreach (var response in responses)
             {
                 i++;
                 Console.WriteLine("Output #{0}: {1}", i, response.GetResponse());
             }
-            
-            Console.ReadLine();
+        }
+
+        private static void DoNumberOfRoutesFinder(Graph graph, List<IResponse> responses)
+        {
+            var numberOfRoutesFinder = new NumberOfRoutesFinder(graph);
+
+            responses.Add(numberOfRoutesFinder.FindRoutes('C', 'C').WithDistanceLessThan(30));
+        }
+
+        private static void DoShortestRouteFinder(List<IResponse> responses, string graphInput)
+        {
+            responses.Add(new ShortestRouteFinder(CreateGraph(graphInput)).FindRoute('A', 'C'));
+            responses.Add(new ShortestRouteFinder(CreateGraph(graphInput)).FindRoute('B', 'B'));
         }
 
         private static void DoExactTripFinder(Graph graph, List<IResponse> responses)
